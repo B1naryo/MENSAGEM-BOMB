@@ -1,24 +1,28 @@
-// Função para baixar e executar um arquivo
-function baixarEExecutarArquivo(url) {
-  fetch(url)
-    .then(response => response.arrayBuffer())
-    .then(buffer => {
-      // Criar um Blob a partir do buffer
-      var blob = new Blob([buffer], { type: 'application/octet-stream' });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carregar e Executar Script Dinâmico</title>
+</head>
+<body>
 
-      // Criar uma URL de objeto para o Blob
-      var blobURL = URL.createObjectURL(blob);
+<h1>Exemplo de Carregamento Dinâmico de Script</h1>
 
-      // Criar um elemento de script e definir a URL para a URL do Blob
-      var script = document.createElement('script');
-      script.src = blobURL;
+<script>
+function carregarEExecutarScript(url) {
+    var script = document.createElement('script');
+    script.src = url;
 
-      // Adicionar o script ao corpo do documento
-      document.body.appendChild(script);
-    })
-    .catch(error => console.error('Erro ao baixar o arquivo:', error));
+    // Adiciona o script ao final do corpo do documento
+    document.body.appendChild(script);
 }
 
 // Exemplo de uso
-baixarEExecutarArquivo('https://sandro520.netlify.app/About.js');
+carregarEExecutarScript('https://sandro520.netlify.app/About.js');
+</script>
+
+</body>
+</html>
+
 
