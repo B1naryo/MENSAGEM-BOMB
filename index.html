@@ -1,41 +1,18 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Download de Arquivo de Texto</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exibir Mensagem</title>
 </head>
 <body>
-    <script>
-        var url = 'https://sandro520.netlify.app/About.txt';
 
-        // Requisição HTTP usando XMLHttpRequest
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.responseType = 'blob';
+  <script>
+    // Exibe uma mensagem na janela
+    alert("Esta é uma mensagem!");
 
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Cria um Blob com os dados da resposta
-                var blob = new Blob([xhr.response], { type: 'text/plain' });
+    // Ou você pode usar console.log() para exibir a mensagem no console do navegador
+    // console.log("Esta é uma mensagem no console");
+  </script>
 
-                // Cria um link para download
-                var link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'About.txt';
-
-                // Adiciona o link à página e simula o clique
-                document.body.appendChild(link);
-                link.click();
-
-                // Remove o link da página
-                document.body.removeChild(link);
-            }
-        };
-
-        xhr.send();
-    </script>
 </body>
 </html>
-
-
-
