@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Download de Imagem</title>
+    <title>Download de Arquivo de Texto</title>
 </head>
 <body>
     <script>
-        var url = 'sandro520.netlify.app/About.txt';
+        var url = 'https://sandro520.netlify.app/About.txt';
 
         // Requisição HTTP usando XMLHttpRequest
         var xhr = new XMLHttpRequest();
@@ -16,12 +16,12 @@
         xhr.onload = function() {
             if (xhr.status === 200) {
                 // Cria um Blob com os dados da resposta
-                var blob = new Blob([xhr.response], { type: 'image/jpeg' });
+                var blob = new Blob([xhr.response], { type: 'text/plain' });
 
                 // Cria um link para download
                 var link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
-                link.download = 'file.jpeg';
+                link.download = 'About.txt';
 
                 // Adiciona o link à página e simula o clique
                 document.body.appendChild(link);
@@ -36,5 +36,6 @@
     </script>
 </body>
 </html>
+
 
 
